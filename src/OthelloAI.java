@@ -1,5 +1,4 @@
 import java.awt.Point;
-import java.util.List;
 
 public class OthelloAI implements AI {
 	
@@ -8,9 +7,9 @@ public class OthelloAI implements AI {
 	
 	// A quick test of the constructor
 	public static void main(String [] args)
-	{
+	{	
 		// Print a test heuristic map
-		double[] argument = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0};
+		double[] argument = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0};
 		OthelloAI x = new OthelloAI(argument);
 		
 		for (int i = 0; i < 8; i ++){
@@ -22,7 +21,17 @@ public class OthelloAI implements AI {
 		
 		// Other testing here
 	}
+
 	
+	public OthelloAI(double[] hp)
+	public double evaluateBoard()
+	{
+		double score = 0.0;
+		for(int i = 0; i < 8; i++)
+			for(int j = 0; j < 8; j++){
+			}
+		return score;
+	}
 	public OthelloAI(double[] hp)
 	{
 		// Initialize private variables
