@@ -1,6 +1,6 @@
 import java.awt.Point;
 
 public interface AI {
-	public Point makeMove(BoardState BS);
+	public Point makeMove(Reversi game);
 
 }
