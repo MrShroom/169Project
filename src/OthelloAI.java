@@ -8,8 +8,7 @@ public class OthelloAI implements AI {
 	public OthelloAI(List<Double> heuristicPramameters)
 	{
 		this.heuristicPramameters = heuristicPramameters;
-	}
-
+	}	
 	@Override
 	public Point makeMove(Reversi game) {
 		// TODO Auto-generated method stub
