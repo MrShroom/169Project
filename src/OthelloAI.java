@@ -23,7 +23,7 @@ public class OthelloAI implements AI {
 	}
 
 	
-	public OthelloAI(double[] hp)
+
 	public double evaluateBoard()
 	{
 		double score = 0.0;
