@@ -21,7 +21,14 @@ public class OthelloAI implements AI {
 		
 		// Other testing here
 	}
-	
+	public double evaluateBoard()
+	{
+		double score = 0.0;
+		for(int i = 0; i < 8; i++)
+			for(int j = 0; j < 8; j++){
+			}
+		return score;
+	}
 	public OthelloAI(double[] hp)
 	{
 		// Initialize private variables
