@@ -10,4 +10,8 @@ public interface Reversi {
 	public byte [][] getBoardState();
 	
 	public Reversi clone();
+	
+	public int count1();
+	
+	public int count2();
 }
