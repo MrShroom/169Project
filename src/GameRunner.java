@@ -64,7 +64,7 @@ public class GameRunner {
 	}
 	
 	private AI makeAI(double[] AIParameters){
-		return OthelloAI(AIParameters);
+		return new OthelloAI(AIParameters);
 	}
 	
 	private AI[] makeRandomAIs(){

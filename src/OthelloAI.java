@@ -3,14 +3,14 @@ import java.util.List;
 
 public class OthelloAI implements AI {
 	
-	Double heuristicFlip;
-	Double[][] heuristicMap;
+	double heuristicFlip;
+	double[][] heuristicMap;
 	
 	// A quick test of the constructor
 	public static void main(String [] args)
 	{
 		// Print a test heuristic map
-		Double[] argument = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0};
+		double[] argument = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0};
 		OthelloAI x = new OthelloAI(argument);
 		
 		for (int i = 0; i < 8; i ++){
@@ -23,11 +23,11 @@ public class OthelloAI implements AI {
 		// Other testing here
 	}
 	
-	public OthelloAI(Double[] hp)
+	public OthelloAI(double[] hp)
 	{
 		// Initialize private variables
 		this.heuristicFlip = hp[9];
-		this.heuristicMap = new Double[8][8];
+		this.heuristicMap = new double[8][8];
 		
 		// Initialize upper left quadrant of heuristicMap with values
 		this.heuristicMap[0][0] = hp[0];
