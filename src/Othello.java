@@ -1,4 +1,6 @@
 import java.awt.Point;
+import java.util.HashSet;
+import java.util.Iterator;
 
 public class Othello implements Reversi{
 
@@ -17,6 +19,13 @@ public class Othello implements Reversi{
 		setCenter();
 	}
 	
+	private Othello(byte[][] boardState, int height, int width, byte currentTurn){
+		this.boardState = boardState;
+		this.height = height;
+		this.width = width;
+		this.currentTurn = currentTurn;
+	}
+	
 	@Override
 	public int currentTurn() {
 		// TODO Auto-generated method stub
@@ -26,14 +35,78 @@ public class Othello implements Reversi{
 	@Override
 	public int makeMove(Point move) {
 		// TODO Auto-generated method stub
+		boardState[move.y][move.x] = currentTurn;
+		for (int i = -1; i < 2; i++){
+			for (int j = -1; j < 2; j++){
+				HashSet<Point> toFlip = flip(new Point(i,j), move);
+				Iterator<Point> flipIter = toFlip.iterator();
+				while(flipIter.hasNext()){
+					Point theFlip = flipIter.next();
+					boardState[theFlip.y][theFlip.x] = currentTurn;
+				}
+			}
+		}
 		flipTurn();
-		return 0;
+		if (availableMoves().size() == 0){
+			flipTurn();
+			if(availableMoves().size() == 0){
+				int ones = count1();
+				int twos = count2();
+				if (ones > twos){
+					return 1;
+				} else if (twos > ones) {
+					return 2;
+				} else {
+					return 0;
+				}
+			}
+		}
+		return -1;
 	}
-
+	
+	private HashSet<Point> flip(Point direction, Point pos)
+	{
+		HashSet<Point> toFlip = new HashSet<Point>();
+		byte currentPlayer = currentTurn;
+		byte flipPlayer = (byte) ((currentPlayer == 1) ? 2 : 1);
+		Point posClone = (Point) pos.clone();
+		posClone.x += direction.x;
+		posClone.y += direction.y;
+		if (posClone.x < width && posClone.y < height && posClone.x >= 0 && posClone.y >= 0 && boardState[posClone.y][posClone.x] == flipPlayer){
+			HashSet<Point> pFlip = new HashSet<Point>();
+			while (posClone.x < width && posClone.y < height && posClone.x >= 0 && posClone.y >= 0) {
+				pFlip.add(posClone);
+				posClone = (Point) posClone.clone();
+				posClone.x += direction.x;
+				posClone.y += direction.y;
+				if (boardState[posClone.y][posClone.x] == currentPlayer){
+					toFlip.addAll(pFlip);
+					break;
+				}
+			}
+			
+		}
+		return toFlip;
+	}
 	@Override
-	public Point[] availableMoves() {
-		// TODO Auto-generated method stub
-		return null;
+	public HashSet<Point> availableMoves() {
+		HashSet<Point> allAvailable = new HashSet<Point>();
+		for(int k = 0; k < width; k++){
+			for(int l = 0; l < height; l++){
+				for (int i = -1; i < 2; i++){
+					for (int j = -1; j < 2; j++){
+						if(boardState[l][k] == 0){
+							Point move = new Point(k, l);
+							HashSet<Point> toFlip = flip(new Point(i,j), move);
+							if(toFlip.size() > 0){
+								allAvailable.add(move);
+							}
+						}
+					}
+				}
+			}	
+		}
+		return allAvailable;
 	}
 
 	@Override
@@ -51,7 +124,7 @@ public class Othello implements Reversi{
 	@Override
 	public Reversi clone() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Othello(getBoardState(), height, width, currentTurn);
 	}
 
 	private void setCenter(){
@@ -92,5 +165,4 @@ public class Othello implements Reversi{
 	private void flipTurn(){
 		currentTurn = (byte) (currentTurn == 1 ? 2 : 1);
 	}
-	
 }

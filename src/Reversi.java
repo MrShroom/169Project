@@ -1,11 +1,12 @@
 import java.awt.Point;
+import java.util.HashSet;
 public interface Reversi {
 	
 	public int currentTurn();
 	
 	public int makeMove(Point move);
 	
-	public Point[] availableMoves();
+	public HashSet<Point> availableMoves();
 	
 	public byte [][] getBoardState();
 	
