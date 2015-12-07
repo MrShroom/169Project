@@ -74,15 +74,18 @@ public class Othello implements Reversi{
 		posClone.y += direction.y;
 		if (posClone.x < width && posClone.y < height && posClone.x >= 0 && posClone.y >= 0 && boardState[posClone.y][posClone.x] == flipPlayer){
 			HashSet<Point> pFlip = new HashSet<Point>();
-			while (posClone.x < width && posClone.y < height && posClone.x >= 0 && posClone.y >= 0) {
-				pFlip.add(posClone);
-				posClone = (Point) posClone.clone();
-				posClone.x += direction.x;
-				posClone.y += direction.y;
+			while (posClone.x < width && posClone.y < height && posClone.x >= 0 && posClone.y >= 0 &&
+					boardState[posClone.y][posClone.x] != 0) {
+				
 				if (boardState[posClone.y][posClone.x] == currentPlayer){
 					toFlip.addAll(pFlip);
 					break;
 				}
+				pFlip.add(posClone);
+				posClone = (Point) posClone.clone();
+				posClone.x += direction.x;
+				posClone.y += direction.y;
+				
 			}
 			
 		}
