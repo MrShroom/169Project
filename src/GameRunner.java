@@ -56,9 +56,9 @@ public class GameRunner {
 	}
 	
 	private double[] generateParameters(){
-		double[] param = new double[9];
-		for(int i = 0; i < 9; i++){
-			param[0] = -100 + (Math.random()*200);
+		double[] param = new double[10];
+		for(int i = 0; i < 10; i++){
+			param[i] = -100 + (Math.random()*200);
 		}
 		return param;
 	}

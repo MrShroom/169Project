@@ -1,9 +1,16 @@
 import java.awt.Point;
+import java.util.HashSet;
+
+
 
 public class OthelloAI implements AI {
 	
 	double heuristicFlip;
 	double[][] heuristicMap;
+	private final double INFINITY = Double.MAX_VALUE;
+	private final int START_DEPTH = 5;
+	private byte player; 
+	private byte otherPlayer;
 	
 	// A quick test of the constructor
 	public static void main(String [] args)
@@ -24,7 +31,7 @@ public class OthelloAI implements AI {
 
 	
 
-	public double evaluateBoard()
+	public double evaluateBoard(Reversi game)
 	{
 		double score = 0.0;
 		for(int i = 0; i < 8; i++)
@@ -71,8 +78,85 @@ public class OthelloAI implements AI {
 
 	@Override
 	public Point makeMove(Reversi game) {
-		// TODO Auto-generated method stub
-		return null;
+		player = (byte) game.currentTurn();
+		otherPlayer  = (byte) (this.player == 1 ? 2 : 1);
+		Point bestSoFar = null;
+		
+		HashSet<Point> moves = game.availableMoves();
+		Double alpha = -INFINITY;
+		Double beta = INFINITY;
+		double w, v =-INFINITY;
+		
+		for(Point myMove: moves)
+		{
+			Reversi gameClone = game.clone();
+			gameClone.makeMove(myMove);
+			if (gameClone.currentTurn() == player)
+				w =minMax(alpha, beta,gameClone,START_DEPTH -1, true);
+			else
+				w =minMax(alpha, beta,gameClone,START_DEPTH -1, false);
+			
+			if (w >= v || bestSoFar == null)
+			{
+				v = w;
+				bestSoFar = myMove;
+			}
+			
+		}
+		
+		return bestSoFar;
+	}
+	
+	private double minMax( double alpha, double beta, Reversi state, int depth, boolean max )
+	{
+		double v =(max ? -1 : 1) * INFINITY;
+		
+		if(depth == 0)
+		{	
+			return evaluateBoard(state);
+		}		
+		 
+		HashSet<Point> moves = state.availableMoves();
+		
+		
+		double w; 
+		for(Point myMove : moves)
+		{
+			Reversi gameClone = state.clone();
+			int winner = gameClone.makeMove(myMove);
+			
+			if(winner == player)
+				return INFINITY;
+			
+			if(winner == otherPlayer)
+				return -INFINITY;
+			
+			if (gameClone.currentTurn() == player)
+				w =minMax(alpha, beta,gameClone,depth -1, true);
+			else
+				w =minMax(alpha, beta,gameClone,depth -1, false);
+			
+			if(max)
+			{
+				if(w >= v)
+				{
+					v = w;
+				}	
+				alpha = Math.max(alpha, v);
+			}
+			else 
+			{
+				if(w <= v)
+				{
+					v = w;
+				}
+				beta = Math.min(beta, v);
+			}			
+			if (alpha >= beta)
+				break;
+		}	
+		
+		return v;		
 	}
 
 }
