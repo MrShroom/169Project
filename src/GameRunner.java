@@ -14,7 +14,7 @@ public class GameRunner {
 		writer.write("GameSession#,");
 		writer.write("AIParameters,");
 		writer.write("WinRate,");
-		writer.write("AveargeTime");
+		writer.write("AveargeTime\n");
 	}
 	public double playSession(double[] AIParameters) throws IOException{
 		AI ours = makeAI(AIParameters);
@@ -51,6 +51,7 @@ public class GameRunner {
 		writer.write(Double.toString(winRate));
 		writer.write(",");
 		writer.write(Double.toString(averageTime));
+		writer.write("\n");
 		gameNum++;
 		return winRate;
 	}
@@ -71,7 +72,7 @@ public class GameRunner {
 		AI[] opponents = new AI[numOfAI];
 		for(int i = 0; i < numOfAI; i++){
 			double[] AIParameters = generateParameters();
-			makeAI(AIParameters);
+			opponents[i] = makeAI(AIParameters);
 		}
 		return opponents;
 	}
@@ -93,4 +94,8 @@ public class GameRunner {
 		return winner;
 	}
 	
+	public void close() throws IOException
+	{
+		writer.close();
+	}
 }

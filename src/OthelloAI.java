@@ -5,38 +5,20 @@ import java.util.HashSet;
 
 public class OthelloAI implements AI {
 	
-	double heuristicFlip;
-	double[][] heuristicMap;
-	private final double INFINITY = Double.MAX_VALUE;
-	private final int START_DEPTH = 5;
+	private double heuristicFlip;
+	private double[][] heuristicMap;
+	private static final double INFINITY = Double.MAX_VALUE;
+	private static final int START_DEPTH = 3;
 	private byte player; 
 	private byte otherPlayer;
 	
-	// A quick test of the constructor
-	public static void main(String [] args)
-	{	
-		// Print a test heuristic map
-		double[] argument = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0};
-		OthelloAI x = new OthelloAI(argument);
-		
-		for (int i = 0; i < 8; i ++){
-			for (int j = 0; j < 8; j++){
-				System.out.print(x.heuristicMap[i][j]);
-			}
-			System.out.println();
-		}
-		
-		// Other testing here
-	}
-
-	
-
-	public double evaluateBoard(Reversi game)
+	public double evaluateBoard(Reversi game, Point move)
 	{
 		double score = 0.0;
 		for(int i = 0; i < 8; i++)
-			for(int j = 0; j < 8; j++){
-			}
+			for(int j = 0; j < 8; j++)
+				if(i == move.x && j == move.y)
+					score = heuristicMap[i][j];
 		return score;
 	}
 	public OthelloAI(double[] hp)
@@ -111,10 +93,7 @@ public class OthelloAI implements AI {
 	{
 		double v =(max ? -1 : 1) * INFINITY;
 		
-		if(depth == 0)
-		{	
-			return evaluateBoard(state);
-		}		
+				
 		 
 		HashSet<Point> moves = state.availableMoves();
 		
@@ -123,6 +102,7 @@ public class OthelloAI implements AI {
 		for(Point myMove : moves)
 		{
 			Reversi gameClone = state.clone();
+			
 			int winner = gameClone.makeMove(myMove);
 			
 			if(winner == player)
@@ -131,7 +111,12 @@ public class OthelloAI implements AI {
 			if(winner == otherPlayer)
 				return -INFINITY;
 			
-			if (gameClone.currentTurn() == player)
+			if(winner == 0)
+				return 0;
+			
+			if(depth == 0)
+				w = evaluateBoard(state, myMove);
+			else if (gameClone.currentTurn() == player)
 				w =minMax(alpha, beta,gameClone,depth -1, true);
 			else
 				w =minMax(alpha, beta,gameClone,depth -1, false);
