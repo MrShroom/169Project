@@ -49,5 +49,6 @@ public class SimulatedAnnealingOptimizer {
 				cur_temp = max_temp * 0.96;														// Decrement the current temp and start again				}
 			}
 		}
+		myRunner.close();
 	}
 }
