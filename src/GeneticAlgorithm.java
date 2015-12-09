@@ -52,7 +52,7 @@ public class GeneticAlgorithm
 	
 	public static void runSimulation()
 	{
-		//create one thread for even member of population
+		//create one thread for every member of population
 		Thread [] t = new Thread [numPopulation];
 		
 		for(int i =0; i<numPopulation;i++)

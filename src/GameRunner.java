@@ -3,7 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 public class GameRunner {
 	
-	private int numOfAI = 10;
+	private int numOfAI = 20;
 	private AI[] opponents;
 	private FileWriter writer;
 	private int gameNum = 1;
@@ -15,6 +15,7 @@ public class GameRunner {
 		writer.write("AIParameters,");
 		writer.write("WinRate,");
 		writer.write("AveargeTime\n");
+		writer.flush();
 	}
 	public double playSession(double[] AIParameters) throws IOException{
 		AI ours = makeAI(AIParameters);
@@ -52,6 +53,7 @@ public class GameRunner {
 		writer.write(",");
 		writer.write(Double.toString(averageTime));
 		writer.write("\n");
+		writer.flush();
 		gameNum++;
 		return winRate;
 	}
