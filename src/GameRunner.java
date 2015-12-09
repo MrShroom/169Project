@@ -56,7 +56,7 @@ public class GameRunner {
 		return winRate;
 	}
 	
-	private double[] generateParameters(){
+	public double[] generateParameters(){
 		double[] param = new double[10];
 		for(int i = 0; i < 10; i++){
 			param[i] = -100 + (Math.random()*200);

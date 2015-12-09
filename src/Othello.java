@@ -168,4 +168,21 @@ public class Othello implements Reversi{
 	private void flipTurn(){
 		currentTurn = (byte) (currentTurn == 1 ? 2 : 1);
 	}
+	
+	public String toString()
+	{
+		String out = "";
+		out += "/n";
+		for(int k = 0; k < width; k++)
+		{
+			for(int l = 0; l < height; l++)
+			{
+				out += boardState[k][l] + " ";
+				
+			}
+			out += "/n";
+		}
+		return out;
+		
+	}
 }
