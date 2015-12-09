@@ -15,12 +15,15 @@ public class SimulatedAnnealingOptimizer {
 		double heuristic_max =  100.0;	// The max and min values passed to the AI constructor.
 		
 		GameRunner myRunner = new GameRunner();	// Initialize a GameRunner
+		boolean Continue = true;
+		
+		int session_number = 0;
 		
 		// BEGIN ANNEALING
 		double[] current_heuristic = myRunner.generateParameters();
 		double current_winrate = myRunner.playSession(current_heuristic);
 		
-		while(cur_temp > max_temp * stop_percent * 0.01){	// Stop the simulation when current temp is less than some percent of the max_temp
+		while(cur_temp > max_temp * stop_percent * 0.01 && Continue){	// Stop the simulation when current temp is less than some percent of the max_temp
 			for(int i = 0; i < sessions_at_cur_temp; i++){	// For each session we play at current temp:
 				double[] heuristic_prime = current_heuristic.clone();	// Clone the current heuristic into heuristic prime (before changing heuristic prime)
 				
@@ -42,12 +45,17 @@ public class SimulatedAnnealingOptimizer {
 					else{shuffled_heuristic[j] = old_value;}									// Otherwise, we don't accept the new heuristic
 					
 					if(current_winrate > 0.999){												// If your winrate is high, break
+						Continue = false;
 						break;
 					}
 				}
 				
-				cur_temp = max_temp * 0.96;														// Decrement the current temp and start again				}
+				cur_temp = max_temp * 0.9;														// Decrement the current temp and start again
+				System.out.print("Completed session # ");
+				System.out.print(session_number);
+				session_number++;
 			}
 		}
+		myRunner.close();
 	}
 }
