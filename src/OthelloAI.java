@@ -14,11 +14,17 @@ public class OthelloAI implements AI {
 	
 	public double evaluateBoard(Reversi game, Point move)
 	{
-		double score = 0.0;
+		Reversi clone = game.clone();
+		clone.makeMove(move);
+		int newPieces = player==1 ? clone.count1() -  game.count1():clone.count2() -  game.count2() ;
+		byte [][] currentState = clone.getBoardState();
+		double score = newPieces * heuristicFlip;
 		for(int i = 0; i < 8; i++)
 			for(int j = 0; j < 8; j++)
-				if(i == move.x && j == move.y)
-					score = heuristicMap[i][j];
+				if(player == currentState[i][j])
+					score += heuristicMap[i][j];
+				else if(otherPlayer == currentState[i][j])
+					score -= heuristicMap[i][j];
 		return score;
 	}
 	public OthelloAI(double[] hp)
@@ -49,15 +55,13 @@ public class OthelloAI implements AI {
 		this.heuristicMap[3][3] = -1.0;
 		
 		// Mirror values from upper left quadrant to every other quadrant
-		for (int i = 0; i < 4; i++){
+		for (int i = 0; i < 4; i++)
 			for (int j = 0; j < 4; j++){
 				this.heuristicMap[7-i][7-j] = this.heuristicMap[i][j];
 				this.heuristicMap[7-i][j]   = this.heuristicMap[i][j];
 				this.heuristicMap[i][7-j]   = this.heuristicMap[i][j];
-			}
-		}
+			}	
 	}
-
 	@Override
 	public Point makeMove(Reversi game) {
 		player = (byte) game.currentTurn();
