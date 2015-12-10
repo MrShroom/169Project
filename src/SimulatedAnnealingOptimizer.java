@@ -53,7 +53,7 @@ public class SimulatedAnnealingOptimizer {
 					else if (Math.random() < Math.exp(Math.abs(winrate_prime - current_winrate) * -100/(cur_temp))){// Else, for some probability (decreasing with temperature)															// Else,
 						current_heuristic = heuristic_prime.clone();											 	// Take the winrate prime
 						current_winrate = winrate_prime;
-						System.out.printf("... it was accepted with probability %0.3f.\n", Math.exp(Math.abs(winrate_prime) - current_winrate)* -100/cur_temp);
+						System.out.printf("... it was accepted with probability %f.\n", Math.exp(Math.abs(winrate_prime - current_winrate)* -100/cur_temp));
 						writer.write("Accepted\n");
 					}
 					else {
