@@ -57,7 +57,7 @@ public class GameRunner {
 		averageTime = totalTime/(numOfAI*2);
 		writer.write(Integer.toString(gameNum));
 		writer.write(" ,");
-		for(int j = 0; j < 9; j++){
+		for(int j = 0; j < 10; j++){
 			writer.write(Double.toString(AIParameters[j]));
 			writer.write(" ");
 		}
