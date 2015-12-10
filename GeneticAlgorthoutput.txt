@@ -1,0 +1,112 @@
+Generation :1 best :0.65
+Number Of Mutations so far: 0
+Generation :2 best :0.7
+Number Of Mutations so far: 2
+Generation :3 best :0.75
+Number Of Mutations so far: 2
+Generation :4 best :0.8
+Number Of Mutations so far: 2
+Generation :5 best :0.7
+Number Of Mutations so far: 3
+Generation :6 best :0.75
+Number Of Mutations so far: 4
+Generation :7 best :0.75
+Number Of Mutations so far: 4
+Generation :8 best :0.775
+Number Of Mutations so far: 4
+Generation :9 best :0.7
+Number Of Mutations so far: 5
+Generation :10 best :0.675
+Number Of Mutations so far: 6
+Generation :11 best :0.75
+Number Of Mutations so far: 8
+Generation :12 best :0.8
+Number Of Mutations so far: 9
+Generation :13 best :0.8
+Number Of Mutations so far: 9
+Generation :14 best :0.775
+Number Of Mutations so far: 9
+Generation :15 best :0.75
+Number Of Mutations so far: 9
+Generation :16 best :0.775
+Number Of Mutations so far: 9
+Generation :17 best :0.875
+Number Of Mutations so far: 10
+Generation :18 best :0.775
+Number Of Mutations so far: 11
+Generation :19 best :0.775
+Number Of Mutations so far: 13
+Generation :20 best :0.775
+Number Of Mutations so far: 13
+Generation :21 best :0.8
+Number Of Mutations so far: 14
+Generation :22 best :0.85
+Number Of Mutations so far: 15
+Generation :23 best :0.825
+Number Of Mutations so far: 16
+Generation :24 best :0.8
+Number Of Mutations so far: 17
+Generation :25 best :0.8
+Number Of Mutations so far: 17
+Generation :26 best :0.8
+Number Of Mutations so far: 18
+Generation :27 best :0.85
+Number Of Mutations so far: 18
+Generation :28 best :0.9
+Number Of Mutations so far: 19
+Generation :29 best :0.9
+Number Of Mutations so far: 20
+Generation :30 best :0.8
+Number Of Mutations so far: 20
+Generation :31 best :0.825
+Number Of Mutations so far: 20
+Generation :32 best :0.825
+Number Of Mutations so far: 20
+Generation :33 best :0.875
+Number Of Mutations so far: 21
+Generation :34 best :0.825
+Number Of Mutations so far: 21
+Generation :35 best :0.875
+Number Of Mutations so far: 22
+Generation :36 best :0.875
+Number Of Mutations so far: 22
+Generation :37 best :0.85
+Number Of Mutations so far: 22
+Generation :38 best :0.925
+Number Of Mutations so far: 22
+Generation :39 best :0.85
+Number Of Mutations so far: 22
+Generation :40 best :0.85
+Number Of Mutations so far: 22
+Generation :41 best :0.85
+Number Of Mutations so far: 22
+Generation :42 best :0.875
+Number Of Mutations so far: 22
+Generation :43 best :0.925
+Number Of Mutations so far: 22
+Generation :44 best :0.925
+Number Of Mutations so far: 22
+Generation :45 best :0.85
+Number Of Mutations so far: 22
+Generation :46 best :0.875
+Number Of Mutations so far: 22
+Generation :47 best :0.9
+Number Of Mutations so far: 23
+Generation :48 best :0.85
+Number Of Mutations so far: 23
+Generation :49 best :0.85
+Number Of Mutations so far: 23
+Best Solution found this run: 
+In Generation: 50
+With total Number Of Mutations: 24
+With win ratio: 0.95
+p[0]: 93.0
+p[1]: 66.06161162222497
+p[2]: 21.599020530350032
+p[3]: 54.77375062865224
+p[4]: 82.92147880618847
+p[5]: -62.18798569914872
+p[6]: -0.8365187700472063
+p[7]: 43.0
+p[8]: 25.0
+p[9]: -17.0
