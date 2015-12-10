@@ -1,10 +1,11 @@
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 
 public class SimulatedAnnealingOptimizer {
 	public static void main(String[] args) throws IOException {
-		double max_temp = 100.0;		// The max temperature in the simulated annealing
+		double max_temp = 10.0;		// The max temperature in the simulated annealing
 		double cur_temp = max_temp;	// The current temperature in the simulated annealing, initialized at the max temp
 		//double step_size = .10;
 		
@@ -18,6 +19,10 @@ public class SimulatedAnnealingOptimizer {
 		boolean Continue = true;
 		
 		int session_number = 0;
+		
+		FileWriter writer = new FileWriter("acceptance.csv");
+		writer.write("Accepted\n");
+		writer.flush();
 		
 		// BEGIN ANNEALING
 		double[] current_heuristic = myRunner.generateParameters();
@@ -40,26 +45,31 @@ public class SimulatedAnnealingOptimizer {
 					double winrate_prime = myRunner.playSession(heuristic_prime);				// Calculate the winrate with the heuristic prime
 					System.out.printf("WR: %.2f", winrate_prime);
 					if(winrate_prime > current_winrate){										// If the winrate prime is greater than the current winrate,
-						System.out.println("... it was accepted.");
+						System.out.println("... it was accepted as a higher winrate.");
 						current_heuristic = heuristic_prime.clone();							// Take it immediately
 						current_winrate = winrate_prime;
+						writer.write("Accepted\n");
 					}
 					else if (Math.random() < Math.exp(Math.abs(winrate_prime - current_winrate) * -100/(cur_temp))){// Else, for some probability (decreasing with temperature)															// Else,
 						current_heuristic = heuristic_prime.clone();											 	// Take the winrate prime
 						current_winrate = winrate_prime;
 						System.out.printf("... it was accepted with probability %0.3f.\n", Math.exp(Math.abs(winrate_prime) - current_winrate)* -100/cur_temp);
+						writer.write("Accepted\n");
 					}
 					else {
 						shuffled_heuristic[j] = old_value;
 						System.out.println("... it was not accepted.");
+						writer.write("Dismissed\n");
 					}											// Otherwise, we don't accept the new heuristic
 
 					if(current_winrate > 0.95){													// If your winrate is high, break
 						Continue = false;
 						break;
 					}
+					
+					writer.flush();
 				}
-				cur_temp = cur_temp * 0.8;														// Decrement the current temp and start again
+				cur_temp = cur_temp * 0.9;														// Decrement the current temp and start again
 				System.out.print("Completed session # ");
 				System.out.print(session_number);
 				System.out.print(" Temp: ");
@@ -67,6 +77,7 @@ public class SimulatedAnnealingOptimizer {
 				session_number++;
 			}
 		}
+		writer.close();
 		myRunner.close();
 	}
 }
