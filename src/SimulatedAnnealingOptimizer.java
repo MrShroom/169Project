@@ -38,18 +38,16 @@ public class SimulatedAnnealingOptimizer {
 					double old_value = shuffled_heuristic[j];									// Store the old value in case the new is not accepted
 					shuffled_heuristic[j] = Math.random()*2*heuristic_max + heuristic_min;
 					double winrate_prime = myRunner.playSession(heuristic_prime);				// Calculate the winrate with the heuristic prime
+					System.out.printf("WR: %.2f", winrate_prime);
 					if(winrate_prime > current_winrate){										// If the winrate prime is greater than the current winrate,
 						System.out.println("... it was accepted.");
 						current_heuristic = heuristic_prime.clone();							// Take it immediately
 						current_winrate = winrate_prime;
-						if(current_winrate >= 0.95){												// If your winrate is high, break
-							break;
-						}
 					}
 					else if (Math.random() < Math.exp(Math.abs(winrate_prime - current_winrate) * -100/(cur_temp))){// Else, for some probability (decreasing with temperature)															// Else,
 						current_heuristic = heuristic_prime.clone();											 	// Take the winrate prime
 						current_winrate = winrate_prime;
-						System.out.println("... it was accepted.");
+						System.out.printf("... it was accepted with probability %0.3f.\n", Math.exp(Math.abs(winrate_prime) - current_winrate)* -100/cur_temp);
 					}
 					else {
 						shuffled_heuristic[j] = old_value;
