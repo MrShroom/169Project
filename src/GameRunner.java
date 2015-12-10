@@ -6,11 +6,24 @@ public class GameRunner {
 	private int numOfAI = 20;
 	private AI[] opponents;
 	private FileWriter writer;
+	private String fileName;
 	private int gameNum = 1;
 	public GameRunner() throws IOException{
+		fileName = "data.csv";
 		opponents = new AI[numOfAI];
 		opponents = makeRandomAIs();
-		writer = new FileWriter("data.csv");
+		writer = new FileWriter(fileName);
+		writer.write("GameSession#,");
+		writer.write("AIParameters,");
+		writer.write("WinRate,");
+		writer.write("AveargeTime\n");
+		writer.flush();
+	}
+	public GameRunner(String dataFileName) throws IOException{
+		fileName = dataFileName;
+		opponents = new AI[numOfAI];
+		opponents = makeRandomAIs();
+		writer = new FileWriter(fileName);
 		writer.write("GameSession#,");
 		writer.write("AIParameters,");
 		writer.write("WinRate,");
