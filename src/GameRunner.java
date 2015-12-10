@@ -16,7 +16,7 @@ public class GameRunner {
 		writer.write("GameSession#,");
 		writer.write("AIParameters,");
 		writer.write("WinRate,");
-		writer.write("AveargeTime\n");
+		writer.write("AverageTime\n");
 		writer.flush();
 	}
 	public GameRunner(String dataFileName) throws IOException{
